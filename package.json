@@ -1,0 +1,53 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "turbo": "yarn dev --turbo",
+    "format:source": "prettier --config .prettierrc --write \"src/**/*.{js,ts,jsx,tsx,css}\"",
+    "lint": "next lint",
+    "build": "next build",
+    "start": "next start",
+    "preview": "next build && next start",
+    "postinstall": "husky install",
+    "prettier": "yarn format:source",
+    "svgr": "npx @svgr/cli --out-dir src/components/icons --typescript --memo --icon 1em --replace-attr-values #000010=currentColor public/assets/icons"
+  },
+  "dependencies": {
+    "@vercel/og": "^0.5.20",
+    "classnames": "^2.3.2",
+    "framer-motion": "^10.16.4",
+    "next": "^13.5.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^1.14.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.8.1",
+    "@commitlint/config-conventional": "^17.8.1",
+    "@types/classnames": "^2.3.1",
+    "@types/node": "18.18.6",
+    "@types/react": "18.2.31",
+    "@types/react-dom": "18.2.14",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.52.0",
+    "eslint-config-next": "^13.5.6",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-tailwindcss": "^3.13.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.3.0",
+    "postcss": "^8.4.31",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^7.8.3",
+    "prettier": "^2.8.8",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.2.2"
+  },
+  "packageManager": "yarn@3.3.1",
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx,css}": "yarn prettier"
+  }
+}

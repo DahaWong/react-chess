@@ -1,0 +1,21 @@
+{
+	"bracketSpacing": false,
+	"singleQuote": false,
+	"bracketSameLine": true,
+	"trailingComma": "es5",
+	"printWidth": 80,
+	"overrides": [
+		{
+			"files": "*.css",
+			"options": {
+				"parser": "css"
+			}
+		},
+		{
+			"files": "*.mdx",
+			"options": {
+				"parser": "mdx"
+			}
+		}
+	]
+}
