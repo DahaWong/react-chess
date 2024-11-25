@@ -3,6 +3,14 @@ import {Piece, Category, Symbol} from "./Piece";
 import {Board} from "../Board";
 
 export class Bishop extends Piece {
+  // 將方向定義為靜態變量
+  static directions = [
+    {dx: 1, dy: 1},
+    {dx: 1, dy: -1},
+    {dx: -1, dy: 1},
+    {dx: -1, dy: -1},
+  ];
+
   constructor(color: Color, position: Position) {
     super(Category.BISHOP, color, position, Symbol.BISHOP);
   }
@@ -12,15 +20,8 @@ export class Bishop extends Piece {
 
     let moves = [];
     const {x, y} = this.position;
-    const directions = [];
 
-    for (let dx of [1, -1]) {
-      for (let dy of [1, -1]) {
-        directions.push({dx, dy});
-      }
-    }
-
-    for (let direction of directions) {
+    for (let direction of Bishop.directions) {
       let {dx, dy} = direction;
       let nextX = x + dx;
       let nextY = y + dy;

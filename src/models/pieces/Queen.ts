@@ -3,25 +3,20 @@ import {Piece, Category, Symbol} from "./Piece";
 import {Board} from "../Board";
 
 export class Queen extends Piece {
+  static directions = [
+    {dx: 1, dy: 1}, {dx: 1, dy: -1}, {dx: -1, dy: 1}, {dx: -1, dy: -1}, // Diagonal directions
+    {dx: 1, dy: 0}, {dx: -1, dy: 0}, {dx: 0, dy: 1}, {dx: 0, dy: -1}    // Straight directions
+  ];
+
   constructor(color: Color, position: Position) {
     super(Category.QUEEN, color, position, Symbol.QUEEN);
   }
 
   getValidMoves(board: Board): Position[] {
-    // TODO: Think about castling
-
     let moves = [];
     const {x, y} = this.position;
-    const directions = [];
 
-    for (let dx of [1, -1, 0]) {
-      for (let dy of [1, -1, 0]) {
-        if (dx === 0 && dy === 0) continue;
-        directions.push({dx, dy});
-      }
-    }
-
-    for (let direction of directions) {
+    for (let direction of Queen.directions) {
       let {dx, dy} = direction;
       let nextX = x + dx;
       let nextY = y + dy;
@@ -32,22 +27,17 @@ export class Queen extends Piece {
 
         // Blocked by piece
         if (targetSquare.piece) {
-          // Blocked by own piece
-          console.log("queen", {x: nextX, y: nextY});
-          console.log("queen next square", targetSquare.piece.color);
-          if (targetSquare.piece.color === this.color) break;
-          // Capture and get blocked
+          if (targetSquare.piece.color === this.color) break; // Blocked by own piece
           else {
-            moves.push({x: nextX, y: nextY});
-            console.log("queen", moves);
+            moves.push({x: nextX, y: nextY}); // Capture opponent piece
             break;
           }
         }
 
-        // Move
+        // Add valid move
         moves.push({x: nextX, y: nextY});
 
-        // Move to next square for not getting blocked
+        // Continue to the next square in the same direction
         nextX += dx;
         nextY += dy;
       }

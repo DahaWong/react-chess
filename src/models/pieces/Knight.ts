@@ -7,33 +7,37 @@ export class Knight extends Piece {
     super(Category.KNIGHT, color, position, Symbol.KNIGHT);
   }
 
+  static directions = [
+    {dx: 2, dy: 1},
+    {dx: 2, dy: -1},
+    {dx: -2, dy: 1},
+    {dx: -2, dy: -1},
+    {dx: 1, dy: 2},
+    {dx: 1, dy: -2},
+    {dx: -1, dy: 2},
+    {dx: -1, dy: -2},
+  ];
+
   getValidMoves(board: Board): Position[] {
     let moves = [];
     const {x, y} = this.position;
-    const directions = [];
 
-    for (let dx of [-2, -1, 1, 2]) {
-      for (let dy of [-2, -1, 1, 2]) {
-        if (Math.abs(dx) !== Math.abs(dy)) {
-          directions.push({dx, dy});
-        }
-      }
-    }
-
-    for (let direction of directions) {
+    for (let direction of Knight.directions) {
       let {dx, dy} = direction;
       let nextX = x + dx;
       let nextY = y + dy;
       let targetSquare = board.getSquare({x: nextX, y: nextY});
-      if (!targetSquare) break;
+      if (!targetSquare) continue;
 
       // Blocked by piece
       if (targetSquare.piece) {
-        if (targetSquare.piece.color === this.color) break; // Blocked by own piece
-        else { // Capture
+        // Blocked by own piece
+        if (targetSquare.piece.color === this.color) continue;
+        else {
+          // Capture
           moves.push({x: nextX, y: nextY});
           // console.log("knight", moves);
-          break;
+          continue;
         }
       }
 
