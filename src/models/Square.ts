@@ -1,4 +1,4 @@
-import {Piece} from "./Piece";
+import {Piece} from "@/models/pieces/Piece";
 import {Position} from "./types";
 
 export class Square {

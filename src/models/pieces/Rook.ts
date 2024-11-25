@@ -1,10 +1,10 @@
-import {Color, Position} from "./types";
-import {Piece, Category} from "./Piece";
-import {Board} from "./Board";
+import {Color, Position} from "../types";
+import {Piece, Category, Symbol} from "./Piece";
+import {Board} from "../Board";
 
 export class Rook extends Piece {
   constructor(color: Color, position: Position) {
-    super(Category.ROOK, color, position);
+    super(Category.ROOK, color, position, Symbol.ROOK);
   }
 
   getValidMoves(board: Board): Position[] {
@@ -29,15 +29,16 @@ export class Rook extends Piece {
         let targetSquare = board.getSquare({x: nextX, y: nextY});
         if (!targetSquare) break;
 
-        // Block by piece
+        // Blocked by piece
         if (targetSquare.piece) {
-          console.log({x: nextX, y: nextY});
-
           // Blocked by own piece
+          console.log("rook", {x: nextX, y: nextY});
+          console.log("rook next square", targetSquare.piece.color);
           if (targetSquare.piece.color === this.color) break;
           // Capture and get blocked
           else {
             moves.push({x: nextX, y: nextY});
+            console.log("rook", moves);
             break;
           }
         }
@@ -50,7 +51,6 @@ export class Rook extends Piece {
         nextY += dy;
       }
     }
-    console.log(moves);
 
     return moves;
   }

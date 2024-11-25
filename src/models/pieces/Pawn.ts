@@ -1,6 +1,6 @@
-import {Color, Position} from "./types";
+import {Color, Position} from "../types";
 import {Category, Piece} from "./Piece";
-import {Board} from "./Board";
+import {Board} from "../Board";
 
 export class Pawn extends Piece {
   constructor(color: Color, position: Position) {
@@ -28,6 +28,7 @@ export class Pawn extends Piece {
       if (!square) break;
 
       if (dy === 0) {
+        if (dx === -2 && this.lastPosition !== null) break;
         // Move forward
         if (!square.piece) {
           moves.push({x: nextX, y: nextY});
@@ -50,7 +51,7 @@ export class Pawn extends Piece {
         }
       }
     }
-    console.log(moves);
+    console.log("pawn", moves);
     return moves;
   }
 }
